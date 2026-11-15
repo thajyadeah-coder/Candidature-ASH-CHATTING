@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>ASH Chatting – Espace recruteur</title>
 <style>
 /* ASH Chatting - thème bleu marine & bleu ciel */
@@ -10,81 +11,74 @@
   --navy:#0b1f4b; --navy2:#12306b; --sky:#38a9f5; --sky-soft:#e8f4fe; --sky-line:#cfe6fa;
   --bg:#f3f7fc; --card:#ffffff; --line:#dbe5f1;
   --text:#14213d; --muted:#64748b;
-  --ok:#16a34a; --warn:#d97706; --bad:#dc2626;
   --shadow:0 4px 18px rgba(11,31,75,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55}
 a{color:var(--sky);font-weight:600}
-.wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
+.wrap{max-width:1200px;margin:0 auto;padding:28px 16px}
 .narrow{max-width:800px}
 
 /* En-tête */
 header.top{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(11,31,75,.25)}
 header.top .muted{color:#b9d4f5;font-size:.85rem}
-header.top .logo{color:#fff}
 header.top .ghost{border-color:rgba(255,255,255,.35);color:#fff}
 header.top .ghost:hover{background:rgba(255,255,255,.12)}
-.logo{font-weight:800;font-size:1.25rem;letter-spacing:.6px;color:var(--navy)}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:.6px;color:#fff}
 .logo span{color:var(--sky)}
 
 /* Cartes */
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:20px;box-shadow:var(--shadow)}
-h1{font-size:1.55rem;margin-bottom:6px;color:var(--navy)}
-h2{font-size:1.05rem;margin-bottom:12px;color:var(--navy);padding-bottom:8px;border-bottom:2px solid var(--sky-soft);display:flex;align-items:center;gap:8px}
-h2::before{content:'';width:5px;height:18px;background:var(--sky);border-radius:3px}
+h1{font-size:1.45rem;margin-bottom:6px;color:var(--navy)}
 .muted{color:var(--muted);font-size:.92rem}
+.center{text-align:center}
 
 /* Formulaires */
 label{display:block;font-size:.82rem;font-weight:600;color:var(--navy2);margin:14px 0 6px}
 input,select,textarea{width:100%;padding:11px 13px;background:#fff;color:var(--text);border:1.5px solid var(--line);border-radius:10px;font-size:.95rem;font-family:inherit;transition:.15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px rgba(56,169,245,.18)}
-input:disabled,select:disabled,textarea:disabled{background:#eef3f9;color:#7b8aa0;cursor:not-allowed}
-input[type=file]{padding:9px;background:var(--sky-soft);border-style:dashed;border-color:var(--sky)}
 textarea{min-height:110px;resize:vertical}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
-@media(max-width:640px){.grid{grid-template-columns:1fr}header.top{padding:12px 14px}}
+@media(max-width:640px){header.top{padding:12px 14px}}
 
 /* Boutons */
-button,.btn{background:linear-gradient(135deg,var(--sky),#1f8fe0);color:#fff;border:0;padding:11px 20px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+button{background:linear-gradient(135deg,var(--sky),#1f8fe0);color:#fff;border:0;padding:11px 20px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
 button:hover{filter:brightness(1.07);transform:translateY(-1px)}
 button:disabled{opacity:.5;cursor:not-allowed;transform:none}
-button.ghost{background:transparent;border:1.5px solid var(--line);color:var(--navy);box-shadow:none}
+button.ghost{background:transparent;border:1.5px solid var(--line);color:var(--navy)}
 button.ghost:hover{background:var(--sky-soft)}
 button.danger{background:linear-gradient(135deg,#ef4444,#dc2626)}
 button.full{width:100%;margin-top:20px;padding:13px}
-
-/* Onglets connexion */
-.tabs{display:flex;gap:6px;margin-bottom:16px;background:var(--sky-soft);padding:5px;border-radius:12px}
-.tabs button{flex:1;background:transparent;color:var(--navy2);box-shadow:none}
-.tabs button.active{background:var(--navy);color:#fff}
 
 /* Messages */
 .msg{padding:11px 14px;border-radius:10px;margin-top:14px;font-size:.9rem;display:none}
 .msg.err{display:block;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
 .msg.ok{display:block;background:var(--sky-soft);color:var(--navy2);border:1px solid var(--sky-line)}
 
-/* Badges statut */
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700}
+/* Badges */
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;white-space:nowrap}
 .b-nouveau{background:#e0f0ff;color:#1366b3}
 .b-en_revue{background:#fff4d6;color:#a16207}
 .b-entretien{background:#e6e0ff;color:#5b3fc9}
 .b-accepte{background:#dcfce7;color:#15803d}
 .b-refuse{background:#fee2e2;color:#b91c1c}
+.tag{display:inline-block;padding:2px 9px;border-radius:8px;font-size:.78rem;font-weight:600;background:var(--sky-soft);color:var(--navy2)}
 
-/* Statistiques admin */
+/* Statistiques */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:20px}
-.stat{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--sky);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+.stat{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--sky);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:.15s}
+.stat:hover{transform:translateY(-2px)}
 .stat b{display:block;font-size:1.7rem;color:var(--navy)}
 .stat span{color:var(--muted);font-size:.8rem;font-weight:600}
+.stat.active{border-top-color:var(--navy);outline:2px solid var(--sky)}
 
-/* Tableau admin */
+/* Tableau */
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .toolbar input{flex:2;min-width:180px}
-.toolbar select{flex:1;min-width:140px}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:10px}
+.count{font-size:.85rem;color:var(--muted);margin-bottom:10px;font-weight:600}
 table{width:100%;border-collapse:collapse;font-size:.9rem}
-th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line)}
-th{color:var(--navy2);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;background:var(--sky-soft)}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--navy2);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;background:var(--sky-soft);white-space:nowrap}
 tr.row{cursor:pointer;transition:.12s}
 tr.row:hover{background:var(--sky-soft)}
 .tablewrap{overflow-x:auto}
@@ -92,201 +86,138 @@ tr.row:hover{background:var(--sky-soft)}
 /* Fenêtre détail */
 .modal-bg{position:fixed;inset:0;background:rgba(11,31,75,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:30px 14px;overflow:auto;z-index:20}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:720px;box-shadow:0 20px 50px rgba(11,31,75,.3)}
-.kv{display:grid;grid-template-columns:150px 1fr;gap:8px 14px;font-size:.92rem;margin:16px 0;padding:16px;background:var(--bg);border-radius:12px}
+.modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:740px;box-shadow:0 20px 50px rgba(11,31,75,.3)}
+.kv{display:grid;grid-template-columns:170px 1fr;gap:10px 14px;font-size:.92rem;margin:16px 0;padding:16px;background:var(--bg);border-radius:12px}
 .kv dt{color:var(--muted);font-weight:600}
 .kv dd{word-break:break-word;white-space:pre-wrap}
+@media(max-width:560px){.kv{grid-template-columns:1fr}}
 .row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.center{text-align:center}
 
-/* Page de connexion */
+/* Connexion */
 .hero{text-align:center;padding:36px 0 22px}
 .hero p{color:var(--muted);margin-top:6px}
-.hero .logo{font-size:2.2rem}
 
-
-/* Sélecteur de langue + filtres */
+/* Langue */
 .head-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .lang-select{width:auto;padding:7px 10px;font-size:.85rem;border-radius:8px;cursor:pointer;font-weight:600}
 header.top .lang-select{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
 header.top .lang-select option{color:#14213d}
 .lang-float{position:absolute;top:16px;right:16px}
-.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:10px}
-.count{font-size:.85rem;color:var(--muted);margin-bottom:10px;font-weight:600}
-.stat.clickable{cursor:pointer;transition:.15s}
-.stat.clickable:hover{transform:translateY(-2px)}
-.stat.active{border-top-color:var(--navy);outline:2px solid var(--sky)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
 <script>
-// ====== Langues du site : Français / English ======
-// Pour ajouter une langue : copie un bloc (fr ou en), traduis-le, puis ajoute
-// une <option> dans les sélecteurs de langue des pages.
+// ====== Connexion Supabase (clé "publishable" : elle peut être publique) ======
+const SUPABASE_URL = 'https://exzrbektcftpsanysclz.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_oQxEq_c9GYWmAvJj-iAV3w_gfFQWt7M';
+const sb = (window.supabase && window.supabase.createClient)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
 
+// Protège contre l'injection de code dans les textes saisis par les candidats
+function esc(v) {
+  return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Profil du recruteur connecté (null si personne n'est connecté)
+async function getProfile() {
+  if (!sb) return null;
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return null;
+    const { data } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
+    return data ? { ...data, email: data.email || session.user.email, user: session.user } : null;
+  } catch (e) {
+    return null;
+  }
+}
+</script>
+<script>
+// ====== Langues : Français / English ======
 const I18N = {
   fr: {
     'logout': 'Déconnexion',
-    'opt.choose': 'Choisir...',
-    'opt.chooseFirst': "Choisir d'abord...",
-    'err.generic': 'Erreur',
-
+    'err.noConfig': "Impossible de se connecter au serveur. Vérifie ta connexion internet puis recharge la page.",
     'st.nouveau': 'Nouveau', 'st.en_revue': 'En revue', 'st.entretien': 'Entretien',
     'st.accepte': 'Accepté', 'st.refuse': 'Refusé',
-
     'v.Homme': 'Homme', 'v.Femme': 'Femme', 'v.Messenger': 'Messenger', 'v.WhatsApp': 'WhatsApp',
     'v.Oui': 'Oui', 'v.Non': 'Non',
     'v.Jour': 'Jour', 'v.Soir': 'Soir', 'v.Nuit': 'Nuit', 'v.Flexible': 'Flexible',
-    'v.Local': 'Local', 'v.En ligne': 'En ligne', 'v.fr': 'Français', 'v.en': 'Anglais',
-
-    'title.index': 'ASH Chatting – Recrutement',
-    'idx.tagline': "Rejoins l'équipe. Crée ton compte et dépose ta candidature en quelques minutes.",
-    'idx.tabLogin': 'Connexion', 'idx.tabSignup': 'Inscription',
-    'idx.fullName': 'Nom complet', 'ph.fullName': 'Ton nom et prénom',
-    'idx.email': 'Email', 'idx.password': 'Mot de passe', 'ph.password': '6 caractères minimum',
-    'idx.btnLogin': 'Se connecter', 'idx.btnSignup': 'Créer mon compte',
-    'idx.created': 'Compte créé ! Vérifie ton email pour confirmer, puis connecte-toi.',
-    'idx.badLogin': 'Email ou mot de passe incorrect.',
-
-    'title.agent': 'ASH Chatting – Ma candidature',
-    'ag.title': 'Ma candidature', 'ag.status': 'Statut :', 'ag.notSent': 'Pas encore envoyée',
-    'ag.formTitle': 'Formulaire de candidature',
-    'ag.horodateur': 'Horodateur (automatique)',
-    'ag.gender': 'Es-tu une femme ou un homme ? *',
-    'ag.fullName': 'Nom et prénom *',
-    'ag.age': 'Âge * (18 ans minimum)',
-    'ag.contactType': 'Messenger ou WhatsApp ? *',
-    'ag.contactLabel': 'Ton Messenger / WhatsApp *',
-    'ag.contactLabelWA': 'Ton numéro WhatsApp *',
-    'ag.contactLabelMS': 'Ton Messenger (nom du profil ou lien) *',
-    'ph.contactNone': "Sélectionne d'abord Messenger ou WhatsApp",
-    'ph.contactWA': '+261 ...',
-    'ph.contactMS': 'Nom ou lien de ton profil Messenger',
-    'ag.discord': 'Ton @ Discord *',
-    'ag.studies': 'Quelles études as-tu faites ? *',
-    'ag.job': 'As-tu un job en ce moment ? *',
-    'ag.jobDetails': 'Si oui, précise ton poste. Si non, explique ta situation (optionnel)',
-    'ph.jobDetails': "Ex : poste, entreprise, horaires... ou la raison pour laquelle tu n'as pas de job en ce moment",
-    'ag.shift': 'Quel shift préfères-tu ? *',
-    'ag.workMode': 'Préfères-tu chatter en local ou en ligne ? *',
-    'ag.experience': 'Décris ton expérience en chatting ainsi que ton parcours professionnel *',
-    'ph.experience': 'Plateformes ou agences, durée, missions réalisées, postes précédents...',
-    'ag.motivation': 'Pourquoi veux-tu travailler comme chatter ? (explique en plusieurs phrases) *',
-    'ag.submit': 'Enregistrer ma candidature',
-    'ag.saved': 'Candidature enregistrée avec succès !',
-    'ag.sendError': "Erreur lors de l'envoi",
-    'ag.info.nouveau': "Candidature reçue. Tu peux encore la modifier tant que le recruteur ne l'a pas ouverte.",
-    'ag.info.en_revue': "Ton dossier est en cours d'examen par l'équipe.",
-    'ag.info.entretien': 'Bonne nouvelle ! Tu as été retenu pour un entretien. Nous te contacterons.',
-    'ag.info.accepte': 'Félicitations, ta candidature est acceptée ! Nous te contacterons très vite.',
-    'ag.info.refuse': "Ta candidature n'a pas été retenue cette fois. Merci pour ton intérêt.",
+    'v.Local': 'Local', 'v.En ligne': 'En ligne',
 
     'title.admin': 'ASH Chatting – Espace recruteur',
+    'lg.title': 'Espace recruteur',
+    'lg.subtitle': 'Connecte-toi pour consulter les candidatures.',
+    'lg.denied': 'Accès réservé au recruteur.',
+    'idx.email': 'Email', 'idx.password': 'Mot de passe',
+    'idx.btnLogin': 'Se connecter',
+    'idx.badLogin': 'Email ou mot de passe incorrect.',
     'ad.recruiter': '· Recruteur',
     'ad.total': 'Total',
-    'ph.search': 'Rechercher (nom, email, Discord, contact, études...)',
+    'ph.search': 'Rechercher (nom, Discord, contact, études, expérience...)',
     'ad.allStatus': 'Tous les statuts', 'ad.allGender': 'Tous les sexes', 'ad.allShift': 'Tous les shifts',
-    'ad.allMode': 'Local et en ligne', 'ad.allJob': 'Job : tous', 'ad.allLang': 'Toutes les langues',
+    'ad.allMode': 'Local et en ligne', 'ad.allJob': 'Job : tous',
     'ad.jobYes': 'A un job', 'ad.jobNo': 'Sans job',
     'ad.sort.recent': 'Tri : plus récentes', 'ad.sort.old': 'Tri : plus anciennes',
     'ad.sort.name': 'Tri : nom A → Z', 'ad.sort.ageAsc': 'Tri : âge croissant',
     'ad.sort.ageDesc': 'Tri : âge décroissant', 'ad.sort.status': 'Tri : par statut',
     'ad.reset': 'Réinitialiser', 'ad.export': 'Exporter CSV', 'ad.refresh': 'Actualiser',
     'ad.results': '{n} résultat(s) sur {total}',
-    'th.candidate': 'Candidat', 'th.gender': 'Sexe', 'th.age': 'Âge', 'th.contact': 'Contact',
-    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Statut', 'th.timestamp': 'Horodateur', 'th.lang': 'Langue',
+    'th.timestamp': 'Horodateur', 'th.candidate': 'Nom et prénom', 'th.gender': 'Sexe', 'th.age': 'Âge',
+    'th.contact': 'Messenger / WhatsApp', 'th.discord': '@ Discord', 'th.job': 'Job',
+    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Statut',
     'ad.empty': 'Aucune candidature.',
-    'ad.statusLabel': 'Statut',
+    'ad.statusLabel': 'Statut du dossier',
     'ad.notes': 'Notes internes (invisibles pour le candidat)',
     'ad.save': 'Enregistrer', 'ad.delete': 'Supprimer', 'ad.saved': 'Enregistré.',
     'ad.confirmDelete': 'Supprimer définitivement cette candidature ?',
-    'lb.created_at': 'Horodateur', 'lb.email': 'Email du compte', 'lb.gender': 'Sexe', 'lb.age': 'Âge',
-    'lb.contact_type': 'Messenger / WhatsApp', 'lb.contact_value': 'Contact', 'lb.discord': '@ Discord',
-    'lb.studies': 'Études', 'lb.current_job': 'Job actuel', 'lb.shift': 'Shift préféré',
-    'lb.work_mode': 'Local / En ligne', 'lb.experience': 'Expérience chatting et pro', 'lb.motivation': 'Motivation',
-    'lb.job_details': 'Détail du job / situation', 'lb.site_lang': 'Langue choisie'
+    'ad.loadError': 'Impossible de charger les candidatures : ',
+    'lb.created_at': 'Horodateur', 'lb.gender': 'Sexe', 'lb.full_name': 'Nom et prénom', 'lb.age': 'Âge',
+    'lb.contact': 'Messenger / WhatsApp', 'lb.discord': '@ Discord', 'lb.studies': 'Études',
+    'lb.current_job': 'Job en ce moment', 'lb.experience': 'Expérience chatting et professionnelle',
+    'lb.shift': 'Shift préféré', 'lb.work_mode': 'Local / En ligne', 'lb.motivation': 'Pourquoi chatter ?'
   },
 
   en: {
     'logout': 'Log out',
-    'opt.choose': 'Choose...',
-    'opt.chooseFirst': 'Choose first...',
-    'err.generic': 'Error',
-
+    'err.noConfig': 'Unable to reach the server. Check your internet connection and reload the page.',
     'st.nouveau': 'New', 'st.en_revue': 'Under review', 'st.entretien': 'Interview',
     'st.accepte': 'Accepted', 'st.refuse': 'Declined',
-
     'v.Homme': 'Man', 'v.Femme': 'Woman', 'v.Messenger': 'Messenger', 'v.WhatsApp': 'WhatsApp',
     'v.Oui': 'Yes', 'v.Non': 'No',
     'v.Jour': 'Day', 'v.Soir': 'Evening', 'v.Nuit': 'Night', 'v.Flexible': 'Flexible',
-    'v.Local': 'On-site', 'v.En ligne': 'Online', 'v.fr': 'French', 'v.en': 'English',
-
-    'title.index': 'ASH Chatting – Recruitment',
-    'idx.tagline': 'Join the team. Create your account and submit your application in a few minutes.',
-    'idx.tabLogin': 'Log in', 'idx.tabSignup': 'Sign up',
-    'idx.fullName': 'Full name', 'ph.fullName': 'Your first and last name',
-    'idx.email': 'Email', 'idx.password': 'Password', 'ph.password': '6 characters minimum',
-    'idx.btnLogin': 'Log in', 'idx.btnSignup': 'Create my account',
-    'idx.created': 'Account created! Check your email to confirm it, then log in.',
-    'idx.badLogin': 'Incorrect email or password.',
-
-    'title.agent': 'ASH Chatting – My application',
-    'ag.title': 'My application', 'ag.status': 'Status:', 'ag.notSent': 'Not submitted yet',
-    'ag.formTitle': 'Application form',
-    'ag.horodateur': 'Timestamp (automatic)',
-    'ag.gender': 'Are you a woman or a man? *',
-    'ag.fullName': 'First and last name *',
-    'ag.age': 'Age * (18 or older)',
-    'ag.contactType': 'Messenger or WhatsApp? *',
-    'ag.contactLabel': 'Your Messenger / WhatsApp *',
-    'ag.contactLabelWA': 'Your WhatsApp number *',
-    'ag.contactLabelMS': 'Your Messenger (profile name or link) *',
-    'ph.contactNone': 'Select Messenger or WhatsApp first',
-    'ph.contactWA': '+261 ...',
-    'ph.contactMS': 'Name or link of your Messenger profile',
-    'ag.discord': 'Your Discord @ *',
-    'ag.studies': 'What studies have you done? *',
-    'ag.job': 'Do you currently have a job? *',
-    'ag.jobDetails': 'If yes, tell us your position. If no, explain your situation (optional)',
-    'ph.jobDetails': 'E.g. position, company, hours... or the reason why you do not have a job right now',
-    'ag.shift': 'Which shift do you prefer? *',
-    'ag.workMode': 'Do you prefer to chat on-site or online? *',
-    'ag.experience': 'Describe your chatting experience and your professional background *',
-    'ph.experience': 'Platforms or agencies, duration, tasks performed, previous positions...',
-    'ag.motivation': 'Why do you want to work as a chatter? (explain in several sentences) *',
-    'ag.submit': 'Save my application',
-    'ag.saved': 'Application saved successfully!',
-    'ag.sendError': 'Error while submitting',
-    'ag.info.nouveau': 'Application received. You can still edit it until the recruiter opens it.',
-    'ag.info.en_revue': 'Your file is being reviewed by the team.',
-    'ag.info.entretien': 'Good news! You have been selected for an interview. We will contact you.',
-    'ag.info.accepte': 'Congratulations, your application has been accepted! We will contact you very soon.',
-    'ag.info.refuse': 'Your application was not selected this time. Thank you for your interest.',
+    'v.Local': 'On-site', 'v.En ligne': 'Online',
 
     'title.admin': 'ASH Chatting – Recruiter area',
+    'lg.title': 'Recruiter area',
+    'lg.subtitle': 'Log in to view the applications.',
+    'lg.denied': 'Access reserved for the recruiter.',
+    'idx.email': 'Email', 'idx.password': 'Password',
+    'idx.btnLogin': 'Log in',
+    'idx.badLogin': 'Incorrect email or password.',
     'ad.recruiter': '· Recruiter',
     'ad.total': 'Total',
-    'ph.search': 'Search (name, email, Discord, contact, studies...)',
+    'ph.search': 'Search (name, Discord, contact, studies, experience...)',
     'ad.allStatus': 'All statuses', 'ad.allGender': 'All genders', 'ad.allShift': 'All shifts',
-    'ad.allMode': 'On-site & online', 'ad.allJob': 'Job: any', 'ad.allLang': 'All languages',
+    'ad.allMode': 'On-site & online', 'ad.allJob': 'Job: any',
     'ad.jobYes': 'Has a job', 'ad.jobNo': 'No job',
     'ad.sort.recent': 'Sort: newest first', 'ad.sort.old': 'Sort: oldest first',
     'ad.sort.name': 'Sort: name A → Z', 'ad.sort.ageAsc': 'Sort: age ascending',
     'ad.sort.ageDesc': 'Sort: age descending', 'ad.sort.status': 'Sort: by status',
     'ad.reset': 'Reset', 'ad.export': 'Export CSV', 'ad.refresh': 'Refresh',
     'ad.results': '{n} result(s) out of {total}',
-    'th.candidate': 'Candidate', 'th.gender': 'Gender', 'th.age': 'Age', 'th.contact': 'Contact',
-    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Status', 'th.timestamp': 'Timestamp', 'th.lang': 'Language',
+    'th.timestamp': 'Timestamp', 'th.candidate': 'Full name', 'th.gender': 'Gender', 'th.age': 'Age',
+    'th.contact': 'Messenger / WhatsApp', 'th.discord': 'Discord @', 'th.job': 'Job',
+    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Status',
     'ad.empty': 'No applications.',
-    'ad.statusLabel': 'Status',
+    'ad.statusLabel': 'Application status',
     'ad.notes': 'Internal notes (not visible to the candidate)',
     'ad.save': 'Save', 'ad.delete': 'Delete', 'ad.saved': 'Saved.',
     'ad.confirmDelete': 'Permanently delete this application?',
-    'lb.created_at': 'Timestamp', 'lb.email': 'Account email', 'lb.gender': 'Gender', 'lb.age': 'Age',
-    'lb.contact_type': 'Messenger / WhatsApp', 'lb.contact_value': 'Contact', 'lb.discord': 'Discord @',
-    'lb.studies': 'Studies', 'lb.current_job': 'Current job', 'lb.shift': 'Preferred shift',
-    'lb.work_mode': 'On-site / Online', 'lb.experience': 'Chatting & professional experience', 'lb.motivation': 'Motivation',
-    'lb.job_details': 'Job details / situation', 'lb.site_lang': 'Chosen language'
+    'ad.loadError': 'Unable to load applications: ',
+    'lb.created_at': 'Timestamp', 'lb.gender': 'Gender', 'lb.full_name': 'Full name', 'lb.age': 'Age',
+    'lb.contact': 'Messenger / WhatsApp', 'lb.discord': 'Discord @', 'lb.studies': 'Studies',
+    'lb.current_job': 'Currently has a job', 'lb.experience': 'Chatting & professional experience',
+    'lb.shift': 'Preferred shift', 'lb.work_mode': 'On-site / Online', 'lb.motivation': 'Why chatting?'
   }
 };
 
@@ -299,14 +230,10 @@ try {
 } catch (e) {}
 if (!I18N[LANG]) LANG = 'fr';
 
-function t(key) {
-  return (I18N[LANG] && I18N[LANG][key]) ?? I18N.fr[key] ?? key;
-}
-// Traduit une valeur stockée en base (ex : "Homme" -> "Man")
-function tv(value) {
+function t(key) { return (I18N[LANG] && I18N[LANG][key]) ?? I18N.fr[key] ?? key; }
+function tv(value) {            // traduit une valeur stockée en base (ex : "Homme" -> "Man")
   if (!value) return '';
-  const k = 'v.' + value;
-  return (I18N[LANG] && I18N[LANG][k]) ?? value;
+  return (I18N[LANG] && I18N[LANG]['v.' + value]) ?? value;
 }
 function statut(k) { return t('st.' + k); }
 function locale() { return LANG === 'fr' ? 'fr-FR' : 'en-GB'; }
@@ -318,7 +245,6 @@ function applyI18n() {
   document.querySelectorAll('.lang-select').forEach(s => { s.value = LANG; });
   if (document.body && document.body.dataset.title) document.title = t(document.body.dataset.title);
 }
-
 function setLang(l) {
   if (!I18N[l]) return;
   LANG = l;
@@ -326,10 +252,37 @@ function setLang(l) {
   applyI18n();
   document.dispatchEvent(new Event('langchange'));
 }
-
 </script>
 </head>
 <body data-title="title.admin">
+
+<!-- ===== Connexion recruteur ===== -->
+<div id="loginView">
+  <select class="lang-select lang-float" onchange="setLang(this.value)" aria-label="Language" style="background:#fff;color:#0b1f4b;border-color:#dbe5f1">
+    <option value="fr">FR – Français</option>
+    <option value="en">EN – English</option>
+  </select>
+  <div class="wrap narrow">
+    <div class="hero">
+      <div class="logo" style="font-size:2rem;color:#0b1f4b">ASH <span>Chatting</span></div>
+      <p style="font-weight:700;color:#0b1f4b;margin-top:10px" data-i18n="lg.title"></p>
+      <p data-i18n="lg.subtitle"></p>
+    </div>
+    <div class="card" style="max-width:440px;margin:0 auto">
+      <form onsubmit="adminLogin(event)">
+        <label data-i18n="idx.email"></label>
+        <input id="lgEmail" type="email" required autocomplete="username">
+        <label data-i18n="idx.password"></label>
+        <input id="lgPass" type="password" required autocomplete="current-password">
+        <button type="submit" class="full" id="lgBtn" data-i18n="idx.btnLogin"></button>
+        <div id="lgMsg" class="msg"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Tableau de bord ===== -->
+<div id="dashView" style="display:none">
 <header class="top">
   <div class="logo">ASH <span>Chatting</span> <span data-i18n="ad.recruiter" style="color:#b9d4f5;font-weight:600"></span></div>
   <div class="head-right">
@@ -338,7 +291,7 @@ function setLang(l) {
       <option value="en">EN – English</option>
     </select>
     <span class="muted" id="who"></span>
-    <button class="ghost" onclick="logout()" data-i18n="logout"></button>
+    <button class="ghost" onclick="adminLogout()" data-i18n="logout"></button>
   </div>
 </header>
 
@@ -358,16 +311,16 @@ function setLang(l) {
       <select id="filterShift" onchange="render()"></select>
       <select id="filterMode" onchange="render()"></select>
       <select id="filterJob" onchange="render()"></select>
-      <select id="filterLang" onchange="render()"></select>
       <select id="sortBy" onchange="render()"></select>
     </div>
     <p class="count" id="count"></p>
     <div class="tablewrap">
       <table>
         <thead><tr>
-          <th data-i18n="th.candidate"></th><th data-i18n="th.gender"></th><th data-i18n="th.age"></th>
-          <th data-i18n="th.contact"></th><th data-i18n="th.shift"></th><th data-i18n="th.mode"></th>
-          <th data-i18n="th.status"></th><th data-i18n="th.timestamp"></th><th data-i18n="th.lang"></th>
+          <th data-i18n="th.timestamp"></th><th data-i18n="th.candidate"></th><th data-i18n="th.gender"></th>
+          <th data-i18n="th.age"></th><th data-i18n="th.contact"></th><th data-i18n="th.discord"></th>
+          <th data-i18n="th.job"></th><th data-i18n="th.shift"></th><th data-i18n="th.mode"></th>
+          <th data-i18n="th.status"></th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
@@ -379,7 +332,7 @@ function setLang(l) {
 <!-- Fiche détail -->
 <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <div style="display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
       <h1 id="mName"></h1>
       <button class="ghost" onclick="closeModal()">✕</button>
     </div>
@@ -397,23 +350,38 @@ function setLang(l) {
     <div id="mMsg" class="msg"></div>
   </div>
 </div>
+</div>
 
 <script>
 let apps = [];
 let current = null;
+let pollTimer = null;
+const HAS_SB = (typeof sb !== 'undefined' && sb);
+const $ = id => document.getElementById(id);
 
-const LABEL_KEYS = ['created_at','email','gender','age','contact_type','contact_value','discord','studies','current_job','job_details','shift','work_mode','experience','motivation','site_lang'];
 const SORTS = [
   ['recent', 'ad.sort.recent'], ['old', 'ad.sort.old'], ['name', 'ad.sort.name'],
   ['ageAsc', 'ad.sort.ageAsc'], ['ageDesc', 'ad.sort.ageDesc'], ['status', 'ad.sort.status']
 ];
 
-const norm = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const norm = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const fmtDate = d => d ? new Date(d).toLocaleString(locale()) : '';
+
+// Contact : lien WhatsApp cliquable si le candidat a choisi WhatsApp
+function contactHtml(a) {
+  const val = esc(a.contact_value);
+  if (a.contact_type === 'WhatsApp') {
+    const digits = String(a.contact_value || '').replace(/\D/g, '');
+    if (digits.length >= 6) {
+      return `<span class="tag">WhatsApp</span><br><a href="https://wa.me/${digits}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${val}</a>`;
+    }
+  }
+  return `<span class="tag">${esc(tv(a.contact_type))}</span><br>${val}`;
+}
 
 // Remplit un <select> en gardant la valeur déjà choisie
 function fill(id, allLabel, pairs) {
-  const sel = document.getElementById(id);
+  const sel = $(id);
   const keep = sel.value;
   let html = allLabel ? `<option value="">${esc(allLabel)}</option>` : '';
   html += pairs.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join('');
@@ -427,54 +395,109 @@ function fillAll() {
   fill('filterShift', t('ad.allShift'), ['Jour', 'Soir', 'Nuit', 'Flexible'].map(v => [v, tv(v)]));
   fill('filterMode', t('ad.allMode'), ['Local', 'En ligne'].map(v => [v, tv(v)]));
   fill('filterJob', t('ad.allJob'), [['Oui', t('ad.jobYes')], ['Non', t('ad.jobNo')]]);
-  fill('filterLang', t('ad.allLang'), ['fr', 'en'].map(v => [v, tv(v)]));
   fill('sortBy', null, SORTS.map(([v, k]) => [v, t(k)]));
   fill('mStatus', null, STATUT_KEYS.map(k => [k, statut(k)]));
 }
 
+/* ---------- Connexion ---------- */
 async function init() {
   applyI18n();
   fillAll();
+  if (!HAS_SB) { showLogin('err.noConfig'); return; }
   const p = await getProfile();
-  if (!p) { location.href = 'index.html'; return; }
-  if (p.role !== 'admin') { location.href = 'agent.html'; return; }
-  document.getElementById('who').textContent = p.email;
-  load();
+  if (p && p.role === 'admin') { showDash(p); return; }
+  if (p) { await sb.auth.signOut(); showLogin('lg.denied'); return; }
+  showLogin();
 }
 
-async function load() {
+let lgKey = null;
+function showLogin(msgKey) {
+  stopPolling();
+  $('dashView').style.display = 'none';
+  $('loginView').style.display = 'block';
+  lgKey = msgKey || null;
+  const el = $('lgMsg');
+  el.textContent = lgKey ? t(lgKey) : '';
+  el.className = 'msg' + (lgKey ? ' err' : '');
+}
+
+function showDash(p) {
+  $('loginView').style.display = 'none';
+  $('dashView').style.display = 'block';
+  $('who').textContent = p.email || (p.user && p.user.email) || '';
+  load();
+  startPolling();
+}
+
+async function adminLogin(e) {
+  e.preventDefault();
+  if (!HAS_SB) { showLogin('err.noConfig'); return; }
+  const btn = $('lgBtn');
+  btn.disabled = true;
+  try {
+    const { error } = await sb.auth.signInWithPassword({
+      email: $('lgEmail').value.trim(),
+      password: $('lgPass').value
+    });
+    if (error) {
+      showLogin('idx.badLogin');
+    } else {
+      const p = await getProfile();
+      if (p && p.role === 'admin') { $('lgPass').value = ''; showDash(p); }
+      else { await sb.auth.signOut(); showLogin('lg.denied'); }
+    }
+  } catch (err) {
+    showLogin('err.noConfig');
+  }
+  btn.disabled = false;
+}
+
+async function adminLogout() {
+  await sb.auth.signOut();
+  apps = [];
+  closeModal();
+  showLogin();
+}
+
+/* ---------- Données ---------- */
+// Actualisation automatique toutes les 30 s (sauf si une fiche est ouverte)
+function startPolling() {
+  stopPolling();
+  pollTimer = setInterval(() => {
+    if (!current && $('dashView').style.display !== 'none') load(true);
+  }, 30000);
+}
+function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
+
+async function load(silent) {
   const { data, error } = await sb.from('applications').select('*').order('created_at', { ascending: false });
-  if (error) { alert(error.message); return; }
-  apps = data;
+  if (error) { if (!silent) alert(t('ad.loadError') + error.message); return; }
+  apps = data || [];
   render();
 }
 
 function resetFilters() {
-  document.getElementById('search').value = '';
-  ['filterStatus', 'filterGender', 'filterShift', 'filterMode', 'filterJob', 'filterLang'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('sortBy').value = 'recent';
+  $('search').value = '';
+  ['filterStatus', 'filterGender', 'filterShift', 'filterMode', 'filterJob'].forEach(id => $(id).value = '');
+  $('sortBy').value = 'recent';
   render();
 }
 
-function filterByStatus(k) {
-  document.getElementById('filterStatus').value = k;
-  render();
-}
+function filterByStatus(k) { $('filterStatus').value = k; render(); }
 
 function getList() {
-  const q = norm(document.getElementById('search').value);
-  const st = document.getElementById('filterStatus').value;
-  const g = document.getElementById('filterGender').value;
-  const sh = document.getElementById('filterShift').value;
-  const md = document.getElementById('filterMode').value;
-  const jb = document.getElementById('filterJob').value;
-  const lg = document.getElementById('filterLang').value;
-  const sort = document.getElementById('sortBy').value || 'recent';
+  const q = norm($('search').value);
+  const st = $('filterStatus').value;
+  const g = $('filterGender').value;
+  const sh = $('filterShift').value;
+  const md = $('filterMode').value;
+  const jb = $('filterJob').value;
+  const sort = $('sortBy').value || 'recent';
 
   const list = apps.filter(a =>
     (!st || a.status === st) && (!g || a.gender === g) && (!sh || a.shift === sh) &&
-    (!md || a.work_mode === md) && (!jb || a.current_job === jb) && (!lg || a.site_lang === lg) &&
-    (!q || norm([a.full_name, a.email, a.discord, a.contact_value, a.studies, a.job_details, a.experience].join(' ')).includes(q))
+    (!md || a.work_mode === md) && (!jb || a.current_job === jb) &&
+    (!q || norm([a.full_name, a.discord, a.contact_value, a.studies, a.experience, a.motivation].join(' ')).includes(q))
   );
 
   const cmp = {
@@ -489,74 +512,88 @@ function getList() {
 }
 
 function renderStats() {
-  const active = document.getElementById('filterStatus').value;
-  let html = `<div class="stat clickable ${active === '' ? 'active' : ''}" onclick="filterByStatus('')"><b>${apps.length}</b><span>${esc(t('ad.total'))}</span></div>`;
+  const active = $('filterStatus').value;
+  let html = `<div class="stat ${active === '' ? 'active' : ''}" onclick="filterByStatus('')"><b>${apps.length}</b><span>${esc(t('ad.total'))}</span></div>`;
   STATUT_KEYS.forEach(k => {
     const n = apps.filter(a => a.status === k).length;
-    html += `<div class="stat clickable ${active === k ? 'active' : ''}" onclick="filterByStatus('${k}')"><b>${n}</b><span>${esc(statut(k))}</span></div>`;
+    html += `<div class="stat ${active === k ? 'active' : ''}" onclick="filterByStatus('${k}')"><b>${n}</b><span>${esc(statut(k))}</span></div>`;
   });
-  document.getElementById('stats').innerHTML = html;
+  $('stats').innerHTML = html;
 }
 
 function render() {
   const list = getList();
   renderStats();
-  document.getElementById('count').textContent = t('ad.results').replace('{n}', list.length).replace('{total}', apps.length);
-  document.getElementById('empty').style.display = list.length ? 'none' : 'block';
-  document.getElementById('rows').innerHTML = list.map(a => `
+  $('count').textContent = t('ad.results').replace('{n}', list.length).replace('{total}', apps.length);
+  $('empty').style.display = list.length ? 'none' : 'block';
+  $('rows').innerHTML = list.map(a => `
     <tr class="row" onclick="openApp('${esc(a.id)}')">
-      <td><b>${esc(a.full_name)}</b><br><span class="muted">${esc(a.discord)}</span></td>
+      <td>${esc(fmtDate(a.created_at))}</td>
+      <td><b>${esc(a.full_name)}</b></td>
       <td>${esc(tv(a.gender))}</td>
       <td>${esc(a.age)}</td>
-      <td>${esc(tv(a.contact_type))}<br><span class="muted">${esc(a.contact_value)}</span></td>
+      <td>${contactHtml(a)}</td>
+      <td>${esc(a.discord)}</td>
+      <td>${esc(tv(a.current_job))}</td>
       <td>${esc(tv(a.shift))}</td>
       <td>${esc(tv(a.work_mode))}</td>
       <td><span class="badge b-${esc(a.status)}">${esc(statut(a.status))}</span></td>
-      <td>${esc(fmtDate(a.created_at))}</td>
-      <td>${esc(tv(a.site_lang))}</td>
     </tr>`).join('');
 }
 
+/* ---------- Fiche détail ---------- */
 function renderDetails() {
   if (!current) return;
-  document.getElementById('mDetails').innerHTML = LABEL_KEYS.map(k => {
-    let val = current[k];
-    if (k === 'created_at') val = fmtDate(val);
-    else if (['gender', 'contact_type', 'current_job', 'shift', 'work_mode', 'site_lang'].includes(k)) val = tv(val);
-    return `<dt>${esc(t('lb.' + k))}</dt><dd>${esc(val) || '—'}</dd>`;
-  }).join('');
+  const a = current;
+  const rows = [
+    ['created_at', esc(fmtDate(a.created_at))],
+    ['gender', esc(tv(a.gender))],
+    ['full_name', esc(a.full_name)],
+    ['age', esc(a.age)],
+    ['contact', contactHtml(a).replace('<br>', ' ')],
+    ['discord', esc(a.discord)],
+    ['studies', esc(a.studies)],
+    ['current_job', esc(tv(a.current_job))],
+    ['experience', esc(a.experience)],
+    ['shift', esc(tv(a.shift))],
+    ['work_mode', esc(tv(a.work_mode))],
+    ['motivation', esc(a.motivation)]
+  ];
+  $('mDetails').innerHTML = rows.map(([k, v]) => `<dt>${esc(t('lb.' + k))}</dt><dd>${v || '—'}</dd>`).join('');
 }
 
 async function openApp(id) {
-  current = apps.find(a => a.id === id);
+  current = apps.find(a => String(a.id) === String(id));
   if (!current) return;
-  document.getElementById('mName').textContent = current.full_name;
+  $('mName').textContent = current.full_name || '';
   renderDetails();
-  document.getElementById('mStatus').value = current.status;
-  document.getElementById('mNotes').value = current.admin_notes || '';
-  document.getElementById('mMsg').className = 'msg';
-  document.getElementById('modalBg').classList.add('open');
+  $('mStatus').value = current.status;
+  $('mNotes').value = current.admin_notes || '';
+  $('mMsg').className = 'msg';
+  $('modalBg').classList.add('open');
 
   // Passe automatiquement "nouveau" -> "en revue" à l'ouverture
   if (current.status === 'nouveau') {
-    const { error } = await sb.from('applications').update({ status: 'en_revue' }).eq('id', current.id);
+    const target = current;
+    const { error } = await sb.from('applications').update({ status: 'en_revue' }).eq('id', target.id);
     if (!error) {
-      current.status = 'en_revue';
-      document.getElementById('mStatus').value = 'en_revue';
+      target.status = 'en_revue';
+      if (current === target) $('mStatus').value = 'en_revue';
       render();
     }
   }
 }
 
 function closeModal() {
-  document.getElementById('modalBg').classList.remove('open');
+  $('modalBg').classList.remove('open');
   current = null;
 }
 
 async function saveReview() {
-  const msg = document.getElementById('mMsg');
-  const status = document.getElementById('mStatus').value;
-  const admin_notes = document.getElementById('mNotes').value.trim() || null;
+  if (!current) return;
+  const msg = $('mMsg');
+  const status = $('mStatus').value;
+  const admin_notes = $('mNotes').value.trim() || null;
   const { error } = await sb.from('applications').update({ status, admin_notes }).eq('id', current.id);
   if (error) { msg.textContent = error.message; msg.className = 'msg err'; return; }
   current.status = status;
@@ -567,6 +604,7 @@ async function saveReview() {
 }
 
 async function removeApp() {
+  if (!current) return;
   if (!confirm(t('ad.confirmDelete'))) return;
   const { error } = await sb.from('applications').delete().eq('id', current.id);
   if (error) { alert(error.message); return; }
@@ -574,25 +612,37 @@ async function removeApp() {
   load();
 }
 
+/* ---------- Export CSV ---------- */
 function exportCsv() {
-  const cols = ['created_at','gender','full_name','age','contact_type','contact_value','discord','studies','current_job','job_details','experience','shift','work_mode','motivation','site_lang','status','admin_notes'];
-  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const cols = ['created_at','gender','full_name','age','contact_type','contact_value','discord','studies','current_job','experience','shift','work_mode','motivation','status','admin_notes'];
+  // Protège aussi contre l'injection de formules dans Excel (cellules commençant par = + - @)
+  const q = v => {
+    let s = String(v ?? '');
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replace(/"/g, '""') + '"';
+  };
   const rows = getList(); // exporte ce qui est affiché (filtres appliqués)
   const csv = [cols.join(',')].concat(rows.map(a => cols.map(c => q(a[c])).join(','))).join('\n');
-  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  a.href = url;
   a.download = 'candidatures-ash-chatting.csv';
+  document.body.appendChild(a);
   a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 document.addEventListener('langchange', () => {
+  if (lgKey) showLogin(lgKey);
   fillAll();
   render();
   renderDetails();
 });
 
-init();
+// Si quoi que ce soit échoue au démarrage, on affiche quand même la connexion (jamais de page vide)
+init().catch(() => showLogin('err.noConfig'));
 </script>
 </body>
 </html>
