@@ -147,7 +147,7 @@ const I18N = {
     'ag.success.text': "Merci ! Nous avons bien reçu ta candidature. Notre équipe l'étudiera et te contactera via le Messenger / WhatsApp ou le Discord que tu as indiqué.",
     'lg.title': 'Espace recruteur',
     'lg.subtitle': 'Connecte-toi pour consulter les candidatures.',
-    'lg.denied': 'Accès réservé au recruteur.',
+    'lg.denied': "Accès réservé au recruteur : ce compte n'a pas le rôle admin.",
     'idx.tagline': "Rejoins l'équipe. Crée ton compte et dépose ta candidature en quelques minutes.",
     'idx.tabLogin': 'Connexion', 'idx.tabSignup': 'Inscription',
     'idx.fullName': 'Nom complet', 'ph.fullName': 'Ton nom et prénom',
@@ -236,7 +236,7 @@ const I18N = {
     'ag.success.text': 'Thank you! We have received your application. Our team will review it and contact you via the Messenger / WhatsApp or Discord you provided.',
     'lg.title': 'Recruiter area',
     'lg.subtitle': 'Log in to view the applications.',
-    'lg.denied': 'Access reserved for the recruiter.',
+    'lg.denied': 'Access reserved for the recruiter: this account does not have the admin role.',
     'idx.tagline': 'Join the team. Create your account and submit your application in a few minutes.',
     'idx.tabLogin': 'Log in', 'idx.tabSignup': 'Sign up',
     'idx.fullName': 'Full name', 'ph.fullName': 'Your first and last name',
@@ -386,6 +386,7 @@ function setLang(l) {
   <div class="stats" id="stats"></div>
 
   <div class="card">
+    <div id="loadErr" class="msg" style="margin:0 0 14px"></div>
     <div class="toolbar">
       <input id="search" data-i18n-ph="ph.search" oninput="render()">
       <button class="ghost" onclick="resetFilters()" data-i18n="ad.reset"></button>
@@ -477,20 +478,31 @@ function fillAll() {
 async function init() {
   applyI18n();
   fillAll();
-  const p = await getProfile();
-  if (p && p.role === 'admin') { showDash(p); return; }
-  if (p) { await sb.auth.signOut(); showLogin('lg.denied'); return; }
-  showLogin();
+  await enterIfAdmin();
 }
 
-let lgKey = null;
-function showLogin(msgKey) {
+// Vérifie la session : affiche le tableau de bord si admin, sinon la connexion (avec la raison)
+async function enterIfAdmin() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { showLogin(); return false; }
+  const { data, error } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
+  if (error) { showLogin(null, 'Supabase : ' + error.message); return false; }
+  if (!data) { showLogin(null, 'Profil introuvable pour ce compte (exécute schema.sql puis reconnecte-toi).'); return false; }
+  if (data.role !== 'admin') { await sb.auth.signOut(); showLogin('lg.denied'); return false; }
+  showDash(data);
+  return true;
+}
+
+let lgKey = null, lgRaw = null;
+function showLogin(msgKey, raw) {
   document.getElementById('dashView').style.display = 'none';
   document.getElementById('loginView').style.display = 'block';
   lgKey = msgKey || null;
+  lgRaw = raw || null;
   const el = document.getElementById('lgMsg');
-  el.textContent = lgKey ? t(lgKey) : '';
-  el.className = 'msg' + (lgKey ? ' err' : '');
+  const text = lgRaw || (lgKey ? t(lgKey) : '');
+  el.textContent = text;
+  el.className = 'msg' + (text ? ' err' : '');
 }
 
 function showDash(p) {
@@ -511,14 +523,8 @@ async function adminLogin(e) {
   if (error) {
     showLogin('idx.badLogin');
   } else {
-    const p = await getProfile();
-    if (p && p.role === 'admin') {
-      document.getElementById('lgPass').value = '';
-      showDash(p);
-    } else {
-      await sb.auth.signOut();
-      showLogin('lg.denied');
-    }
+    document.getElementById('lgPass').value = '';
+    await enterIfAdmin();
   }
   btn.disabled = false;
 }
@@ -530,9 +536,15 @@ async function adminLogout() {
 }
 
 async function load() {
+  const box = document.getElementById('loadErr');
   const { data, error } = await sb.from('applications').select('*').order('created_at', { ascending: false });
-  if (error) { alert(error.message); return; }
-  apps = data;
+  if (error) {
+    box.textContent = 'Supabase : ' + error.message;
+    box.className = 'msg err';
+    return;
+  }
+  box.className = 'msg';
+  apps = data || [];
   render();
 }
 
@@ -674,7 +686,7 @@ function exportCsv() {
 }
 
 document.addEventListener('langchange', () => {
-  if (lgKey) showLogin(lgKey);
+  if (lgKey || lgRaw) showLogin(lgKey, lgRaw);
   fillAll();
   render();
   renderDetails();
