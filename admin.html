@@ -116,7 +116,6 @@ header.top .lang-select option{color:#14213d}
 .stat.clickable{cursor:pointer;transition:.15s}
 .stat.clickable:hover{transform:translateY(-2px)}
 .stat.active{border-top-color:var(--navy);outline:2px solid var(--sky)}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
@@ -140,14 +139,7 @@ const I18N = {
     'v.Jour': 'Jour', 'v.Soir': 'Soir', 'v.Nuit': 'Nuit', 'v.Flexible': 'Flexible',
     'v.Local': 'Local', 'v.En ligne': 'En ligne', 'v.fr': 'Français', 'v.en': 'Anglais',
 
-    'title.index': 'ASH Chatting – Candidature',
-    'ag.pageTitle': 'Rejoins ASH Chatting',
-    'ag.intro': 'Remplis le formulaire ci-dessous pour déposer ta candidature. Cela ne prend que quelques minutes.',
-    'ag.success.title': 'Candidature envoyée !',
-    'ag.success.text': "Merci ! Nous avons bien reçu ta candidature. Notre équipe l'étudiera et te contactera via le Messenger / WhatsApp ou le Discord que tu as indiqué.",
-    'lg.title': 'Espace recruteur',
-    'lg.subtitle': 'Connecte-toi pour consulter les candidatures.',
-    'lg.denied': "Accès réservé au recruteur : ce compte n'a pas le rôle admin.",
+    'title.index': 'ASH Chatting – Recrutement',
     'idx.tagline': "Rejoins l'équipe. Crée ton compte et dépose ta candidature en quelques minutes.",
     'idx.tabLogin': 'Connexion', 'idx.tabSignup': 'Inscription',
     'idx.fullName': 'Nom complet', 'ph.fullName': 'Ton nom et prénom',
@@ -229,14 +221,7 @@ const I18N = {
     'v.Jour': 'Day', 'v.Soir': 'Evening', 'v.Nuit': 'Night', 'v.Flexible': 'Flexible',
     'v.Local': 'On-site', 'v.En ligne': 'Online', 'v.fr': 'French', 'v.en': 'English',
 
-    'title.index': 'ASH Chatting – Application',
-    'ag.pageTitle': 'Join ASH Chatting',
-    'ag.intro': 'Fill in the form below to submit your application. It only takes a few minutes.',
-    'ag.success.title': 'Application sent!',
-    'ag.success.text': 'Thank you! We have received your application. Our team will review it and contact you via the Messenger / WhatsApp or Discord you provided.',
-    'lg.title': 'Recruiter area',
-    'lg.subtitle': 'Log in to view the applications.',
-    'lg.denied': 'Access reserved for the recruiter: this account does not have the admin role.',
+    'title.index': 'ASH Chatting – Recruitment',
     'idx.tagline': 'Join the team. Create your account and submit your application in a few minutes.',
     'idx.tabLogin': 'Log in', 'idx.tabSignup': 'Sign up',
     'idx.fullName': 'Full name', 'ph.fullName': 'Your first and last name',
@@ -345,31 +330,6 @@ function setLang(l) {
 </script>
 </head>
 <body data-title="title.admin">
-<div id="loginView" style="display:none">
-  <select class="lang-select lang-float" onchange="setLang(this.value)" aria-label="Language" style="background:#fff;color:#0b1f4b;border-color:#dbe5f1">
-    <option value="fr">FR – Français</option>
-    <option value="en">EN – English</option>
-  </select>
-  <div class="wrap narrow">
-    <div class="hero">
-      <div class="logo" style="font-size:2rem">ASH <span>Chatting</span></div>
-      <p style="font-weight:700;color:#0b1f4b;margin-top:10px" data-i18n="lg.title"></p>
-      <p data-i18n="lg.subtitle"></p>
-    </div>
-    <div class="card" style="max-width:440px;margin:0 auto">
-      <form onsubmit="adminLogin(event)">
-        <label data-i18n="idx.email"></label>
-        <input id="lgEmail" type="email" required>
-        <label data-i18n="idx.password"></label>
-        <input id="lgPass" type="password" required>
-        <button class="full" id="lgBtn" data-i18n="idx.btnLogin"></button>
-        <div id="lgMsg" class="msg"></div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div id="dashView" style="display:none">
 <header class="top">
   <div class="logo">ASH <span>Chatting</span> <span data-i18n="ad.recruiter" style="color:#b9d4f5;font-weight:600"></span></div>
   <div class="head-right">
@@ -378,7 +338,7 @@ function setLang(l) {
       <option value="en">EN – English</option>
     </select>
     <span class="muted" id="who"></span>
-    <button class="ghost" onclick="adminLogout()" data-i18n="logout"></button>
+    <button class="ghost" onclick="logout()" data-i18n="logout"></button>
   </div>
 </header>
 
@@ -386,7 +346,6 @@ function setLang(l) {
   <div class="stats" id="stats"></div>
 
   <div class="card">
-    <div id="loadErr" class="msg" style="margin:0 0 14px"></div>
     <div class="toolbar">
       <input id="search" data-i18n-ph="ph.search" oninput="render()">
       <button class="ghost" onclick="resetFilters()" data-i18n="ad.reset"></button>
@@ -439,8 +398,6 @@ function setLang(l) {
   </div>
 </div>
 
-</div>
-
 <script>
 let apps = [];
 let current = null;
@@ -478,73 +435,17 @@ function fillAll() {
 async function init() {
   applyI18n();
   fillAll();
-  await enterIfAdmin();
-}
-
-// Vérifie la session : affiche le tableau de bord si admin, sinon la connexion (avec la raison)
-async function enterIfAdmin() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) { showLogin(); return false; }
-  const { data, error } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
-  if (error) { showLogin(null, 'Supabase : ' + error.message); return false; }
-  if (!data) { showLogin(null, 'Profil introuvable pour ce compte (exécute schema.sql puis reconnecte-toi).'); return false; }
-  if (data.role !== 'admin') { await sb.auth.signOut(); showLogin('lg.denied'); return false; }
-  showDash(data);
-  return true;
-}
-
-let lgKey = null, lgRaw = null;
-function showLogin(msgKey, raw) {
-  document.getElementById('dashView').style.display = 'none';
-  document.getElementById('loginView').style.display = 'block';
-  lgKey = msgKey || null;
-  lgRaw = raw || null;
-  const el = document.getElementById('lgMsg');
-  const text = lgRaw || (lgKey ? t(lgKey) : '');
-  el.textContent = text;
-  el.className = 'msg' + (text ? ' err' : '');
-}
-
-function showDash(p) {
-  document.getElementById('loginView').style.display = 'none';
-  document.getElementById('dashView').style.display = 'block';
+  const p = await getProfile();
+  if (!p) { location.href = 'index.html'; return; }
+  if (p.role !== 'admin') { location.href = 'agent.html'; return; }
   document.getElementById('who').textContent = p.email;
   load();
 }
 
-async function adminLogin(e) {
-  e.preventDefault();
-  const btn = document.getElementById('lgBtn');
-  btn.disabled = true;
-  const { error } = await sb.auth.signInWithPassword({
-    email: document.getElementById('lgEmail').value.trim(),
-    password: document.getElementById('lgPass').value
-  });
-  if (error) {
-    showLogin('idx.badLogin');
-  } else {
-    document.getElementById('lgPass').value = '';
-    await enterIfAdmin();
-  }
-  btn.disabled = false;
-}
-
-async function adminLogout() {
-  await sb.auth.signOut();
-  apps = [];
-  showLogin();
-}
-
 async function load() {
-  const box = document.getElementById('loadErr');
   const { data, error } = await sb.from('applications').select('*').order('created_at', { ascending: false });
-  if (error) {
-    box.textContent = 'Supabase : ' + error.message;
-    box.className = 'msg err';
-    return;
-  }
-  box.className = 'msg';
-  apps = data || [];
+  if (error) { alert(error.message); return; }
+  apps = data;
   render();
 }
 
@@ -686,7 +587,6 @@ function exportCsv() {
 }
 
 document.addEventListener('langchange', () => {
-  if (lgKey || lgRaw) showLogin(lgKey, lgRaw);
   fillAll();
   render();
   renderDetails();
