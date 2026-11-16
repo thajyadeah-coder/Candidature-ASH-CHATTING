@@ -254,7 +254,10 @@ function showMsg(elId, msg, type) {
 
 function errKey(err) {
   const m = String((err && err.message) || '').trim();
-  return t('c.err.' + m) !== 'c.err.' + m ? '@c.err.' + m : '@c.err.generic';
+  if (t('c.err.' + m) !== 'c.err.' + m) return '@c.err.' + m;
+  // erreur inconnue : on garde le détail technique pour trouver la cause
+  console.error('Erreur Supabase :', err);
+  return t('c.err.generic') + (m ? ' (' + m + ')' : '');
 }
 
 function getLevel() {
