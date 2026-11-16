@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <title>ASH Chatting – Espace recruteur</title>
 <style>
 /* ASH Chatting - thème bleu marine & bleu ciel */
@@ -15,60 +14,64 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55}
-a{color:var(--sky);font-weight:600}
-.wrap{max-width:1200px;margin:0 auto;padding:28px 16px}
-.narrow{max-width:800px}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
+[hidden]{display:none !important}
 
 /* En-tête */
-header.top{display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(11,31,75,.25)}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:8px 10px;flex-wrap:wrap;padding:14px 28px;background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(11,31,75,.25)}
 header.top .muted{color:#b9d4f5;font-size:.85rem}
+header.top .logo{color:#fff}
 header.top .ghost{border-color:rgba(255,255,255,.35);color:#fff}
 header.top .ghost:hover{background:rgba(255,255,255,.12)}
-.logo{font-weight:800;font-size:1.25rem;letter-spacing:.6px;color:#fff}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:.6px;color:var(--navy);white-space:nowrap}
 .logo span{color:var(--sky)}
+.head-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.lang-select{width:auto;padding:7px 10px;font-size:.85rem;border-radius:8px;cursor:pointer;font-weight:600;background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.lang-select option{color:#14213d}
+@media(max-width:640px){header.top{padding:12px 14px}}
 
-/* Cartes */
+/* Cartes & formulaires */
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:20px;box-shadow:var(--shadow)}
-h1{font-size:1.45rem;margin-bottom:6px;color:var(--navy)}
+h1{font-size:1.55rem;margin-bottom:6px;color:var(--navy)}
 .muted{color:var(--muted);font-size:.92rem}
-.center{text-align:center}
-
-/* Formulaires */
 label{display:block;font-size:.82rem;font-weight:600;color:var(--navy2);margin:14px 0 6px}
 input,select,textarea{width:100%;padding:11px 13px;background:#fff;color:var(--text);border:1.5px solid var(--line);border-radius:10px;font-size:.95rem;font-family:inherit;transition:.15s}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px rgba(56,169,245,.18)}
 textarea{min-height:110px;resize:vertical}
-@media(max-width:640px){header.top{padding:12px 14px}}
-
-/* Boutons */
-button{background:linear-gradient(135deg,var(--sky),#1f8fe0);color:#fff;border:0;padding:11px 20px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
+button,.btn{background:linear-gradient(135deg,var(--sky),#1f8fe0);color:#fff;border:0;padding:11px 20px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit}
 button:hover{filter:brightness(1.07);transform:translateY(-1px)}
 button:disabled{opacity:.5;cursor:not-allowed;transform:none}
-button.ghost{background:transparent;border:1.5px solid var(--line);color:var(--navy)}
+button.ghost{background:transparent;border:1.5px solid var(--line);color:var(--navy);box-shadow:none}
 button.ghost:hover{background:var(--sky-soft)}
 button.danger{background:linear-gradient(135deg,#ef4444,#dc2626)}
 button.full{width:100%;margin-top:20px;padding:13px}
-
-/* Messages */
 .msg{padding:11px 14px;border-radius:10px;margin-top:14px;font-size:.9rem;display:none}
 .msg.err{display:block;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
 .msg.ok{display:block;background:var(--sky-soft);color:var(--navy2);border:1px solid var(--sky-line)}
 
+/* Connexion */
+.login{max-width:420px;margin:60px auto}
+.login .logo{font-size:2.1rem;text-align:center;margin-bottom:6px}
+.login p{text-align:center;color:var(--muted);margin-bottom:10px}
+
 /* Badges */
-.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700}
 .b-nouveau{background:#e0f0ff;color:#1366b3}
 .b-en_revue{background:#fff4d6;color:#a16207}
 .b-entretien{background:#e6e0ff;color:#5b3fc9}
 .b-accepte{background:#dcfce7;color:#15803d}
 .b-refuse{background:#fee2e2;color:#b91c1c}
-.tag{display:inline-block;padding:2px 9px;border-radius:8px;font-size:.78rem;font-weight:600;background:var(--sky-soft);color:var(--navy2)}
+.lv{display:inline-block;padding:3px 10px;border-radius:8px;font-size:.76rem;font-weight:700}
+.lv-debutant{background:#fff4d6;color:#a16207}
+.lv-experimente{background:#dcfce7;color:#15803d}
 
 /* Statistiques */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:20px}
-.stat{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--sky);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:.15s}
-.stat:hover{transform:translateY(-2px)}
+.stat{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--sky);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow)}
 .stat b{display:block;font-size:1.7rem;color:var(--navy)}
 .stat span{color:var(--muted);font-size:.8rem;font-weight:600}
+.stat.clickable{cursor:pointer;transition:.15s}
+.stat.clickable:hover{transform:translateY(-2px)}
 .stat.active{border-top-color:var(--navy);outline:2px solid var(--sky)}
 
 /* Tableau */
@@ -77,212 +80,53 @@ button.full{width:100%;margin-top:20px;padding:13px}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:10px}
 .count{font-size:.85rem;color:var(--muted);margin-bottom:10px;font-weight:600}
 table{width:100%;border-collapse:collapse;font-size:.9rem}
-th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--navy2);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;background:var(--sky-soft);white-space:nowrap}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--navy2);font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.4px;background:var(--sky-soft)}
 tr.row{cursor:pointer;transition:.12s}
 tr.row:hover{background:var(--sky-soft)}
 .tablewrap{overflow-x:auto}
+.center{text-align:center}
+.pid{font-size:.74rem;color:var(--muted);letter-spacing:.5px;font-weight:600;white-space:nowrap}
 
-/* Fenêtre détail */
+/* Fiche détail */
 .modal-bg{position:fixed;inset:0;background:rgba(11,31,75,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:30px 14px;overflow:auto;z-index:20}
 .modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:740px;box-shadow:0 20px 50px rgba(11,31,75,.3)}
-.kv{display:grid;grid-template-columns:170px 1fr;gap:10px 14px;font-size:.92rem;margin:16px 0;padding:16px;background:var(--bg);border-radius:12px}
+.modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:720px;box-shadow:0 20px 50px rgba(11,31,75,.3)}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:8px 14px;font-size:.92rem;margin:16px 0;padding:16px;background:var(--bg);border-radius:12px}
 .kv dt{color:var(--muted);font-weight:600}
 .kv dd{word-break:break-word;white-space:pre-wrap}
-@media(max-width:560px){.kv{grid-template-columns:1fr}}
 .row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-
-/* Connexion */
-.hero{text-align:center;padding:36px 0 22px}
-.hero p{color:var(--muted);margin-top:6px}
-
-/* Langue */
-.head-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.lang-select{width:auto;padding:7px 10px;font-size:.85rem;border-radius:8px;cursor:pointer;font-weight:600}
-header.top .lang-select{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
-header.top .lang-select option{color:#14213d}
-.lang-float{position:absolute;top:16px;right:16px}
+@media(max-width:520px){.kv{grid-template-columns:1fr}.kv dt{margin-top:6px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-// ====== Connexion Supabase (clé "publishable" : elle peut être publique) ======
-const SUPABASE_URL = 'https://exzrbektcftpsanysclz.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_oQxEq_c9GYWmAvJj-iAV3w_gfFQWt7M';
-const sb = (window.supabase && window.supabase.createClient)
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-  : null;
-
-// Protège contre l'injection de code dans les textes saisis par les candidats
-function esc(v) {
-  return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-// Profil du recruteur connecté (null si personne n'est connecté)
-async function getProfile() {
-  if (!sb) return null;
-  try {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) return null;
-    const { data } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
-    return data ? { ...data, email: data.email || session.user.email, user: session.user } : null;
-  } catch (e) {
-    return null;
-  }
-}
-</script>
-<script>
-// ====== Langues : Français / English ======
-const I18N = {
-  fr: {
-    'logout': 'Déconnexion',
-    'err.noConfig': "Impossible de se connecter au serveur. Vérifie ta connexion internet puis recharge la page.",
-    'st.nouveau': 'Nouveau', 'st.en_revue': 'En revue', 'st.entretien': 'Entretien',
-    'st.accepte': 'Accepté', 'st.refuse': 'Refusé',
-    'v.Homme': 'Homme', 'v.Femme': 'Femme', 'v.Messenger': 'Messenger', 'v.WhatsApp': 'WhatsApp',
-    'v.Oui': 'Oui', 'v.Non': 'Non',
-    'v.Jour': 'Jour', 'v.Soir': 'Soir', 'v.Nuit': 'Nuit', 'v.Flexible': 'Flexible',
-    'v.Local': 'Local', 'v.En ligne': 'En ligne',
-
-    'title.admin': 'ASH Chatting – Espace recruteur',
-    'lg.title': 'Espace recruteur',
-    'lg.subtitle': 'Connecte-toi pour consulter les candidatures.',
-    'lg.denied': 'Accès réservé au recruteur.',
-    'idx.email': 'Email', 'idx.password': 'Mot de passe',
-    'idx.btnLogin': 'Se connecter',
-    'idx.badLogin': 'Email ou mot de passe incorrect.',
-    'ad.recruiter': '· Recruteur',
-    'ad.total': 'Total',
-    'ph.search': 'Rechercher (nom, Discord, contact, études, expérience...)',
-    'ad.allStatus': 'Tous les statuts', 'ad.allGender': 'Tous les sexes', 'ad.allShift': 'Tous les shifts',
-    'ad.allMode': 'Local et en ligne', 'ad.allJob': 'Job : tous',
-    'ad.jobYes': 'A un job', 'ad.jobNo': 'Sans job',
-    'ad.sort.recent': 'Tri : plus récentes', 'ad.sort.old': 'Tri : plus anciennes',
-    'ad.sort.name': 'Tri : nom A → Z', 'ad.sort.ageAsc': 'Tri : âge croissant',
-    'ad.sort.ageDesc': 'Tri : âge décroissant', 'ad.sort.status': 'Tri : par statut',
-    'ad.reset': 'Réinitialiser', 'ad.export': 'Exporter CSV', 'ad.refresh': 'Actualiser',
-    'ad.results': '{n} résultat(s) sur {total}',
-    'th.timestamp': 'Horodateur', 'th.candidate': 'Nom et prénom', 'th.gender': 'Sexe', 'th.age': 'Âge',
-    'th.contact': 'Messenger / WhatsApp', 'th.discord': '@ Discord', 'th.job': 'Job',
-    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Statut',
-    'ad.empty': 'Aucune candidature.',
-    'ad.statusLabel': 'Statut du dossier',
-    'ad.notes': 'Notes internes (invisibles pour le candidat)',
-    'ad.save': 'Enregistrer', 'ad.delete': 'Supprimer', 'ad.saved': 'Enregistré.',
-    'ad.confirmDelete': 'Supprimer définitivement cette candidature ?',
-    'ad.loadError': 'Impossible de charger les candidatures : ',
-    'lb.created_at': 'Horodateur', 'lb.gender': 'Sexe', 'lb.full_name': 'Nom et prénom', 'lb.age': 'Âge',
-    'lb.contact': 'Messenger / WhatsApp', 'lb.discord': '@ Discord', 'lb.studies': 'Études',
-    'lb.current_job': 'Job en ce moment', 'lb.experience': 'Expérience chatting et professionnelle',
-    'lb.shift': 'Shift préféré', 'lb.work_mode': 'Local / En ligne', 'lb.motivation': 'Pourquoi chatter ?'
-  },
-
-  en: {
-    'logout': 'Log out',
-    'err.noConfig': 'Unable to reach the server. Check your internet connection and reload the page.',
-    'st.nouveau': 'New', 'st.en_revue': 'Under review', 'st.entretien': 'Interview',
-    'st.accepte': 'Accepted', 'st.refuse': 'Declined',
-    'v.Homme': 'Man', 'v.Femme': 'Woman', 'v.Messenger': 'Messenger', 'v.WhatsApp': 'WhatsApp',
-    'v.Oui': 'Yes', 'v.Non': 'No',
-    'v.Jour': 'Day', 'v.Soir': 'Evening', 'v.Nuit': 'Night', 'v.Flexible': 'Flexible',
-    'v.Local': 'On-site', 'v.En ligne': 'Online',
-
-    'title.admin': 'ASH Chatting – Recruiter area',
-    'lg.title': 'Recruiter area',
-    'lg.subtitle': 'Log in to view the applications.',
-    'lg.denied': 'Access reserved for the recruiter.',
-    'idx.email': 'Email', 'idx.password': 'Password',
-    'idx.btnLogin': 'Log in',
-    'idx.badLogin': 'Incorrect email or password.',
-    'ad.recruiter': '· Recruiter',
-    'ad.total': 'Total',
-    'ph.search': 'Search (name, Discord, contact, studies, experience...)',
-    'ad.allStatus': 'All statuses', 'ad.allGender': 'All genders', 'ad.allShift': 'All shifts',
-    'ad.allMode': 'On-site & online', 'ad.allJob': 'Job: any',
-    'ad.jobYes': 'Has a job', 'ad.jobNo': 'No job',
-    'ad.sort.recent': 'Sort: newest first', 'ad.sort.old': 'Sort: oldest first',
-    'ad.sort.name': 'Sort: name A → Z', 'ad.sort.ageAsc': 'Sort: age ascending',
-    'ad.sort.ageDesc': 'Sort: age descending', 'ad.sort.status': 'Sort: by status',
-    'ad.reset': 'Reset', 'ad.export': 'Export CSV', 'ad.refresh': 'Refresh',
-    'ad.results': '{n} result(s) out of {total}',
-    'th.timestamp': 'Timestamp', 'th.candidate': 'Full name', 'th.gender': 'Gender', 'th.age': 'Age',
-    'th.contact': 'Messenger / WhatsApp', 'th.discord': 'Discord @', 'th.job': 'Job',
-    'th.shift': 'Shift', 'th.mode': 'Mode', 'th.status': 'Status',
-    'ad.empty': 'No applications.',
-    'ad.statusLabel': 'Application status',
-    'ad.notes': 'Internal notes (not visible to the candidate)',
-    'ad.save': 'Save', 'ad.delete': 'Delete', 'ad.saved': 'Saved.',
-    'ad.confirmDelete': 'Permanently delete this application?',
-    'ad.loadError': 'Unable to load applications: ',
-    'lb.created_at': 'Timestamp', 'lb.gender': 'Gender', 'lb.full_name': 'Full name', 'lb.age': 'Age',
-    'lb.contact': 'Messenger / WhatsApp', 'lb.discord': 'Discord @', 'lb.studies': 'Studies',
-    'lb.current_job': 'Currently has a job', 'lb.experience': 'Chatting & professional experience',
-    'lb.shift': 'Preferred shift', 'lb.work_mode': 'On-site / Online', 'lb.motivation': 'Why chatting?'
-  }
-};
-
-const STATUT_KEYS = ['nouveau', 'en_revue', 'entretien', 'accepte', 'refuse'];
-
-let LANG = 'fr';
-try {
-  const saved = localStorage.getItem('ash_lang');
-  LANG = saved || ((navigator.language || 'fr').slice(0, 2));
-} catch (e) {}
-if (!I18N[LANG]) LANG = 'fr';
-
-function t(key) { return (I18N[LANG] && I18N[LANG][key]) ?? I18N.fr[key] ?? key; }
-function tv(value) {            // traduit une valeur stockée en base (ex : "Homme" -> "Man")
-  if (!value) return '';
-  return (I18N[LANG] && I18N[LANG]['v.' + value]) ?? value;
-}
-function statut(k) { return t('st.' + k); }
-function locale() { return LANG === 'fr' ? 'fr-FR' : 'en-GB'; }
-
-function applyI18n() {
-  document.documentElement.lang = LANG;
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
-  document.querySelectorAll('.lang-select').forEach(s => { s.value = LANG; });
-  if (document.body && document.body.dataset.title) document.title = t(document.body.dataset.title);
-}
-function setLang(l) {
-  if (!I18N[l]) return;
-  LANG = l;
-  try { localStorage.setItem('ash_lang', l); } catch (e) {}
-  applyI18n();
-  document.dispatchEvent(new Event('langchange'));
-}
-</script>
+<script src="config.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body data-title="title.admin">
 
 <!-- ===== Connexion recruteur ===== -->
-<div id="loginView">
-  <select class="lang-select lang-float" onchange="setLang(this.value)" aria-label="Language" style="background:#fff;color:#0b1f4b;border-color:#dbe5f1">
-    <option value="fr">FR – Français</option>
-    <option value="en">EN – English</option>
-  </select>
-  <div class="wrap narrow">
-    <div class="hero">
-      <div class="logo" style="font-size:2rem;color:#0b1f4b">ASH <span>Chatting</span></div>
-      <p style="font-weight:700;color:#0b1f4b;margin-top:10px" data-i18n="lg.title"></p>
-      <p data-i18n="lg.subtitle"></p>
-    </div>
-    <div class="card" style="max-width:440px;margin:0 auto">
-      <form onsubmit="adminLogin(event)">
-        <label data-i18n="idx.email"></label>
-        <input id="lgEmail" type="email" required autocomplete="username">
-        <label data-i18n="idx.password"></label>
-        <input id="lgPass" type="password" required autocomplete="current-password">
-        <button type="submit" class="full" id="lgBtn" data-i18n="idx.btnLogin"></button>
-        <div id="lgMsg" class="msg"></div>
-      </form>
-    </div>
+<div id="loginView" hidden>
+  <div style="position:absolute;top:16px;right:16px">
+    <select class="lang-select" style="background:#fff;color:var(--navy);border-color:var(--line)" onchange="setLang(this.value)" aria-label="Language">
+      <option value="fr">FR – Français</option>
+      <option value="en">EN – English</option>
+    </select>
   </div>
+  <form class="card login" onsubmit="doLogin(event)">
+    <div class="logo">ASH <span>Chatting</span></div>
+    <h1 style="text-align:center;font-size:1.25rem" data-i18n="ad.login.title"></h1>
+    <p data-i18n="ad.login.sub"></p>
+    <label for="lEmail" data-i18n="ad.email"></label>
+    <input id="lEmail" type="email" required autocomplete="username">
+    <label for="lPass" data-i18n="ad.password"></label>
+    <input id="lPass" type="password" required autocomplete="current-password">
+    <button class="full" id="lBtn" data-i18n="ad.login.btn"></button>
+    <div id="lMsg" class="msg"></div>
+  </form>
 </div>
 
-<!-- ===== Tableau de bord ===== -->
-<div id="dashView" style="display:none">
+<!-- ===== Espace recruteur ===== -->
+<div id="appView" hidden>
 <header class="top">
   <div class="logo">ASH <span>Chatting</span> <span data-i18n="ad.recruiter" style="color:#b9d4f5;font-weight:600"></span></div>
   <div class="head-right">
@@ -291,7 +135,7 @@ function setLang(l) {
       <option value="en">EN – English</option>
     </select>
     <span class="muted" id="who"></span>
-    <button class="ghost" onclick="adminLogout()" data-i18n="logout"></button>
+    <button class="ghost" onclick="doLogout()" data-i18n="logout"></button>
   </div>
 </header>
 
@@ -307,6 +151,7 @@ function setLang(l) {
     </div>
     <div class="filters">
       <select id="filterStatus" onchange="render()"></select>
+      <select id="filterLevel" onchange="render()"></select>
       <select id="filterGender" onchange="render()"></select>
       <select id="filterShift" onchange="render()"></select>
       <select id="filterMode" onchange="render()"></select>
@@ -317,10 +162,9 @@ function setLang(l) {
     <div class="tablewrap">
       <table>
         <thead><tr>
-          <th data-i18n="th.timestamp"></th><th data-i18n="th.candidate"></th><th data-i18n="th.gender"></th>
-          <th data-i18n="th.age"></th><th data-i18n="th.contact"></th><th data-i18n="th.discord"></th>
-          <th data-i18n="th.job"></th><th data-i18n="th.shift"></th><th data-i18n="th.mode"></th>
-          <th data-i18n="th.status"></th>
+          <th data-i18n="th.candidate"></th><th data-i18n="th.level"></th><th data-i18n="th.gender"></th><th data-i18n="th.age"></th>
+          <th data-i18n="th.contact"></th><th data-i18n="th.shift"></th><th data-i18n="th.mode"></th>
+          <th data-i18n="th.status"></th><th data-i18n="th.timestamp"></th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
@@ -332,7 +176,7 @@ function setLang(l) {
 <!-- Fiche détail -->
 <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
       <h1 id="mName"></h1>
       <button class="ghost" onclick="closeModal()">✕</button>
     </div>
@@ -355,29 +199,17 @@ function setLang(l) {
 <script>
 let apps = [];
 let current = null;
-let pollTimer = null;
-const HAS_SB = (typeof sb !== 'undefined' && sb);
-const $ = id => document.getElementById(id);
 
+const LABEL_KEYS = ['created_at','public_id','level','email','gender','age','contact_type','contact_value','discord','studies','current_job','shift','work_mode','experience','motivation'];
+const TV_KEYS = ['gender','contact_type','current_job','shift','work_mode','level'];
 const SORTS = [
   ['recent', 'ad.sort.recent'], ['old', 'ad.sort.old'], ['name', 'ad.sort.name'],
   ['ageAsc', 'ad.sort.ageAsc'], ['ageDesc', 'ad.sort.ageDesc'], ['status', 'ad.sort.status']
 ];
 
-const norm = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const $ = id => document.getElementById(id);
+const norm = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const fmtDate = d => d ? new Date(d).toLocaleString(locale()) : '';
-
-// Contact : lien WhatsApp cliquable si le candidat a choisi WhatsApp
-function contactHtml(a) {
-  const val = esc(a.contact_value);
-  if (a.contact_type === 'WhatsApp') {
-    const digits = String(a.contact_value || '').replace(/\D/g, '');
-    if (digits.length >= 6) {
-      return `<span class="tag">WhatsApp</span><br><a href="https://wa.me/${digits}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${val}</a>`;
-    }
-  }
-  return `<span class="tag">${esc(tv(a.contact_type))}</span><br>${val}`;
-}
 
 // Remplit un <select> en gardant la valeur déjà choisie
 function fill(id, allLabel, pairs) {
@@ -386,11 +218,12 @@ function fill(id, allLabel, pairs) {
   let html = allLabel ? `<option value="">${esc(allLabel)}</option>` : '';
   html += pairs.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join('');
   sel.innerHTML = html;
-  sel.value = keep;
+  if (keep && Array.from(sel.options).some(o => o.value === keep)) sel.value = keep;
 }
 
 function fillAll() {
   fill('filterStatus', t('ad.allStatus'), STATUT_KEYS.map(k => [k, statut(k)]));
+  fill('filterLevel', t('ad.allLevel'), ['debutant', 'experimente'].map(v => [v, tv(v)]));
   fill('filterGender', t('ad.allGender'), ['Homme', 'Femme'].map(v => [v, tv(v)]));
   fill('filterShift', t('ad.allShift'), ['Jour', 'Soir', 'Nuit', 'Flexible'].map(v => [v, tv(v)]));
   fill('filterMode', t('ad.allMode'), ['Local', 'En ligne'].map(v => [v, tv(v)]));
@@ -399,95 +232,73 @@ function fillAll() {
   fill('mStatus', null, STATUT_KEYS.map(k => [k, statut(k)]));
 }
 
-/* ---------- Connexion ---------- */
-async function init() {
-  applyI18n();
+// ----- Connexion / déconnexion -----
+function showLogin(errKey) {
+  $('appView').hidden = true;
+  $('loginView').hidden = false;
+  const m = $('lMsg');
+  if (errKey) { m.textContent = t(errKey); m.className = 'msg err'; } else { m.className = 'msg'; }
+}
+
+async function showApp(profile) {
+  $('loginView').hidden = true;
+  $('appView').hidden = false;
+  $('who').textContent = profile.email || '';
   fillAll();
-  if (!HAS_SB) { showLogin('err.noConfig'); return; }
-  const p = await getProfile();
-  if (p && p.role === 'admin') { showDash(p); return; }
-  if (p) { await sb.auth.signOut(); showLogin('lg.denied'); return; }
-  showLogin();
+  await load();
 }
 
-let lgKey = null;
-function showLogin(msgKey) {
-  stopPolling();
-  $('dashView').style.display = 'none';
-  $('loginView').style.display = 'block';
-  lgKey = msgKey || null;
-  const el = $('lgMsg');
-  el.textContent = lgKey ? t(lgKey) : '';
-  el.className = 'msg' + (lgKey ? ' err' : '');
-}
-
-function showDash(p) {
-  $('loginView').style.display = 'none';
-  $('dashView').style.display = 'block';
-  $('who').textContent = p.email || (p.user && p.user.email) || '';
-  load();
-  startPolling();
-}
-
-async function adminLogin(e) {
+async function doLogin(e) {
   e.preventDefault();
-  if (!HAS_SB) { showLogin('err.noConfig'); return; }
-  const btn = $('lgBtn');
+  const btn = $('lBtn');
   btn.disabled = true;
-  try {
-    const { error } = await sb.auth.signInWithPassword({
-      email: $('lgEmail').value.trim(),
-      password: $('lgPass').value
-    });
-    if (error) {
-      showLogin('idx.badLogin');
-    } else {
-      const p = await getProfile();
-      if (p && p.role === 'admin') { $('lgPass').value = ''; showDash(p); }
-      else { await sb.auth.signOut(); showLogin('lg.denied'); }
-    }
-  } catch (err) {
-    showLogin('err.noConfig');
-  }
+  const { error } = await sb.auth.signInWithPassword({ email: $('lEmail').value.trim(), password: $('lPass').value });
+  if (error) { btn.disabled = false; showLogin('ad.login.bad'); return; }
+  const p = await getProfile();
   btn.disabled = false;
+  if (!p || p.role !== 'admin') { await sb.auth.signOut(); showLogin('ad.login.notAdmin'); return; }
+  $('lPass').value = '';
+  showApp(p);
 }
 
-async function adminLogout() {
+async function doLogout() {
   await sb.auth.signOut();
   apps = [];
   closeModal();
   showLogin();
 }
 
-/* ---------- Données ---------- */
-// Actualisation automatique toutes les 30 s (sauf si une fiche est ouverte)
-function startPolling() {
-  stopPolling();
-  pollTimer = setInterval(() => {
-    if (!current && $('dashView').style.display !== 'none') load(true);
-  }, 30000);
+async function init() {
+  applyI18n();
+  fillAll();
+  const p = await getProfile();
+  if (p && p.role === 'admin') showApp(p); else showLogin();
 }
-function stopPolling() { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }
 
-async function load(silent) {
+// ----- Données -----
+async function load() {
   const { data, error } = await sb.from('applications').select('*').order('created_at', { ascending: false });
-  if (error) { if (!silent) alert(t('ad.loadError') + error.message); return; }
-  apps = data || [];
+  if (error) { alert(error.message); return; }
+  apps = data;
   render();
 }
 
 function resetFilters() {
   $('search').value = '';
-  ['filterStatus', 'filterGender', 'filterShift', 'filterMode', 'filterJob'].forEach(id => $(id).value = '');
+  ['filterStatus', 'filterLevel', 'filterGender', 'filterShift', 'filterMode', 'filterJob'].forEach(id => { $(id).value = ''; });
   $('sortBy').value = 'recent';
   render();
 }
 
-function filterByStatus(k) { $('filterStatus').value = k; render(); }
+function filterByStatus(k) {
+  $('filterStatus').value = k;
+  render();
+}
 
 function getList() {
   const q = norm($('search').value);
   const st = $('filterStatus').value;
+  const lv = $('filterLevel').value;
   const g = $('filterGender').value;
   const sh = $('filterShift').value;
   const md = $('filterMode').value;
@@ -495,9 +306,9 @@ function getList() {
   const sort = $('sortBy').value || 'recent';
 
   const list = apps.filter(a =>
-    (!st || a.status === st) && (!g || a.gender === g) && (!sh || a.shift === sh) &&
+    (!st || a.status === st) && (!lv || a.level === lv) && (!g || a.gender === g) && (!sh || a.shift === sh) &&
     (!md || a.work_mode === md) && (!jb || a.current_job === jb) &&
-    (!q || norm([a.full_name, a.discord, a.contact_value, a.studies, a.experience, a.motivation].join(' ')).includes(q))
+    (!q || norm([a.full_name, a.public_id, a.email, a.discord, a.contact_value, a.studies, a.experience].join(' ')).includes(q))
   );
 
   const cmp = {
@@ -513,12 +324,16 @@ function getList() {
 
 function renderStats() {
   const active = $('filterStatus').value;
-  let html = `<div class="stat ${active === '' ? 'active' : ''}" onclick="filterByStatus('')"><b>${apps.length}</b><span>${esc(t('ad.total'))}</span></div>`;
+  let html = `<div class="stat clickable ${active === '' ? 'active' : ''}" onclick="filterByStatus('')"><b>${apps.length}</b><span>${esc(t('ad.total'))}</span></div>`;
   STATUT_KEYS.forEach(k => {
     const n = apps.filter(a => a.status === k).length;
-    html += `<div class="stat ${active === k ? 'active' : ''}" onclick="filterByStatus('${k}')"><b>${n}</b><span>${esc(statut(k))}</span></div>`;
+    html += `<div class="stat clickable ${active === k ? 'active' : ''}" onclick="filterByStatus('${k}')"><b>${n}</b><span>${esc(statut(k))}</span></div>`;
   });
   $('stats').innerHTML = html;
+}
+
+function levelBadge(l) {
+  return l ? `<span class="lv lv-${esc(l)}">${esc(tv(l))}</span>` : '—';
 }
 
 function render() {
@@ -528,44 +343,32 @@ function render() {
   $('empty').style.display = list.length ? 'none' : 'block';
   $('rows').innerHTML = list.map(a => `
     <tr class="row" onclick="openApp('${esc(a.id)}')">
-      <td>${esc(fmtDate(a.created_at))}</td>
-      <td><b>${esc(a.full_name)}</b></td>
+      <td><b>${esc(a.full_name)}</b><br><span class="pid">${esc(a.public_id)}</span></td>
+      <td>${levelBadge(a.level)}</td>
       <td>${esc(tv(a.gender))}</td>
       <td>${esc(a.age)}</td>
-      <td>${contactHtml(a)}</td>
-      <td>${esc(a.discord)}</td>
-      <td>${esc(tv(a.current_job))}</td>
+      <td>${esc(tv(a.contact_type))}<br><span class="muted">${esc(a.contact_value)}</span></td>
       <td>${esc(tv(a.shift))}</td>
       <td>${esc(tv(a.work_mode))}</td>
       <td><span class="badge b-${esc(a.status)}">${esc(statut(a.status))}</span></td>
+      <td>${esc(fmtDate(a.created_at))}</td>
     </tr>`).join('');
 }
 
-/* ---------- Fiche détail ---------- */
 function renderDetails() {
   if (!current) return;
-  const a = current;
-  const rows = [
-    ['created_at', esc(fmtDate(a.created_at))],
-    ['gender', esc(tv(a.gender))],
-    ['full_name', esc(a.full_name)],
-    ['age', esc(a.age)],
-    ['contact', contactHtml(a).replace('<br>', ' ')],
-    ['discord', esc(a.discord)],
-    ['studies', esc(a.studies)],
-    ['current_job', esc(tv(a.current_job))],
-    ['experience', esc(a.experience)],
-    ['shift', esc(tv(a.shift))],
-    ['work_mode', esc(tv(a.work_mode))],
-    ['motivation', esc(a.motivation)]
-  ];
-  $('mDetails').innerHTML = rows.map(([k, v]) => `<dt>${esc(t('lb.' + k))}</dt><dd>${v || '—'}</dd>`).join('');
+  $('mDetails').innerHTML = LABEL_KEYS.map(k => {
+    let val = current[k];
+    if (k === 'created_at') val = fmtDate(val);
+    else if (TV_KEYS.includes(k)) val = tv(val);
+    return `<dt>${esc(t('lb.' + k))}</dt><dd>${esc(val) || '—'}</dd>`;
+  }).join('');
 }
 
 async function openApp(id) {
-  current = apps.find(a => String(a.id) === String(id));
+  current = apps.find(a => a.id === id);
   if (!current) return;
-  $('mName').textContent = current.full_name || '';
+  $('mName').textContent = current.full_name;
   renderDetails();
   $('mStatus').value = current.status;
   $('mNotes').value = current.admin_notes || '';
@@ -573,12 +376,12 @@ async function openApp(id) {
   $('modalBg').classList.add('open');
 
   // Passe automatiquement "nouveau" -> "en revue" à l'ouverture
+  // (le candidat ne peut alors plus modifier sa candidature)
   if (current.status === 'nouveau') {
-    const target = current;
-    const { error } = await sb.from('applications').update({ status: 'en_revue' }).eq('id', target.id);
+    const { error } = await sb.from('applications').update({ status: 'en_revue' }).eq('id', current.id);
     if (!error) {
-      target.status = 'en_revue';
-      if (current === target) $('mStatus').value = 'en_revue';
+      current.status = 'en_revue';
+      $('mStatus').value = 'en_revue';
       render();
     }
   }
@@ -590,7 +393,6 @@ function closeModal() {
 }
 
 async function saveReview() {
-  if (!current) return;
   const msg = $('mMsg');
   const status = $('mStatus').value;
   const admin_notes = $('mNotes').value.trim() || null;
@@ -604,7 +406,6 @@ async function saveReview() {
 }
 
 async function removeApp() {
-  if (!current) return;
   if (!confirm(t('ad.confirmDelete'))) return;
   const { error } = await sb.from('applications').delete().eq('id', current.id);
   if (error) { alert(error.message); return; }
@@ -612,37 +413,25 @@ async function removeApp() {
   load();
 }
 
-/* ---------- Export CSV ---------- */
 function exportCsv() {
-  const cols = ['created_at','gender','full_name','age','contact_type','contact_value','discord','studies','current_job','experience','shift','work_mode','motivation','status','admin_notes'];
-  // Protège aussi contre l'injection de formules dans Excel (cellules commençant par = + - @)
-  const q = v => {
-    let s = String(v ?? '');
-    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
-    return '"' + s.replace(/"/g, '""') + '"';
-  };
+  const cols = ['created_at','public_id','level','email','gender','full_name','age','contact_type','contact_value','discord','studies','current_job','experience','shift','work_mode','motivation','status','admin_notes'];
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
   const rows = getList(); // exporte ce qui est affiché (filtres appliqués)
   const csv = [cols.join(',')].concat(rows.map(a => cols.map(c => q(a[c])).join(','))).join('\n');
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
-  a.href = url;
+  a.href = URL.createObjectURL(blob);
   a.download = 'candidatures-ash-chatting.csv';
-  document.body.appendChild(a);
   a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 document.addEventListener('langchange', () => {
-  if (lgKey) showLogin(lgKey);
   fillAll();
-  render();
-  renderDetails();
+  if (!$('appView').hidden) { render(); renderDetails(); }
+  else if ($('lMsg').className.includes('err')) { /* message de connexion : reste tel quel */ }
 });
 
-// Si quoi que ce soit échoue au démarrage, on affiche quand même la connexion (jamais de page vide)
-init().catch(() => showLogin('err.noConfig'));
+init();
 </script>
 </body>
 </html>
