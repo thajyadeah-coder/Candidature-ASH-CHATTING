@@ -2,8 +2,8 @@
 // Remplace les deux valeurs ci-dessous par celles de ton projet
 // (Supabase > Project Settings > API). Utilise la clé "anon / public",
 // jamais la clé "service_role".
-const SUPABASE_URL = 'https://TON-PROJET.supabase.co';
-const SUPABASE_ANON_KEY = 'TA-CLE-ANON-PUBLIQUE';
+const SUPABASE_URL = 'https://exzrbektcftpsanysclz.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_oQxEq_c9GYWmAvJj-iAV3w_gfFQWt7M';
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
